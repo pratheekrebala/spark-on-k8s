@@ -19,10 +19,15 @@ spec:
         app: {{ template "zeppelin-with-spark.name" . }}
         release: {{ .Release.Name }}
     spec:
+      {{ if .Values.image.pullSecrets }}
+      imagePullSecrets:
+      {{ toYaml .Values.image.pullSecrets | indent 0 }}
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}/{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
           ports:
             - name: http
               containerPort: {{ .Values.zeppelinService.zeppelinPort }}
