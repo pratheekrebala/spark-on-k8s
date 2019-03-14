@@ -135,6 +135,7 @@ COPY sbin /opt/spark/sbin
 COPY conf /opt/spark/conf
 COPY kubernetes/dockerfiles/spark/entrypoint.sh /opt/
 COPY examples /opt/spark/examples
+COPY python /opt/spark/python
 
 # Why not use ENV?
 COPY setSparkEnvVars.sh /opt/
